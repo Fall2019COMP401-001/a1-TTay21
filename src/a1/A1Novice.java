@@ -1,9 +1,12 @@
 package a1;
 
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class A1Novice {
+
 	static class Customer {
+
 		String firstName = "";
 		String lastName = "";
 		int items = 0;
@@ -30,12 +33,13 @@ public class A1Novice {
 			this.price[this.count] = price;
 			this.count++;
 		};
-		double total = 0.00;
-		double getTotal () {
+		float total = 0.00f;
+		float getTotal () {
 			for (int i = 0; i < items; i++) {
 				this.total += (this.quantity[i]*this.price[i]);
+
 			}
-			return total;
+			return this.total;
 		}
 		};
 	static Customer makeCustomer() {
@@ -44,6 +48,7 @@ public class A1Novice {
 	public static void main(String[] args) {
 		
 		Scanner user_input = new Scanner(System.in);
+	    DecimalFormat twoSpaces = new DecimalFormat("##.##");
 
 		int customerNum = user_input.nextInt();
 		Customer[] customer = new Customer [customerNum];
@@ -69,7 +74,7 @@ public class A1Novice {
 
 		for (int i = 0; i < customer.length; i++) {
 			System.out.println(customer[i].firstName.charAt(0) + ". " + 
-					customer[i].lastName + ": " + customer[i].getTotal());
+					customer[i].lastName + ": " + String.format("%.2f", customer[i].getTotal()));
 		}
 		user_input.close();
 		}
