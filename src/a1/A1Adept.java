@@ -129,6 +129,6 @@ public class A1Adept {
 	    System.out.println(smallCust.firstName + " " + smallCust.lastName + 
 				" (" + String.format("%.2f", smallCust.total) + ")");
 		System.out.println("Average: " + String.format("%.2f", sum));
-		
+		// attempt to get it back up
 	} // main closer
 }
