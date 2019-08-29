@@ -11,6 +11,13 @@ public class A1Jedi {
 		String lastName = "";
 		int items = 0;
 		int count = 0;
+		boolean[] alreadyPurchased;
+		void setAlreadyPurchased() {
+			alreadyPurchased = new boolean[this.items+1];
+			for (int i = 0; i < alreadyPurchased.length; i++) {
+				this.alreadyPurchased[i] = false;
+			}
+		}
 		// this function is used to get the quantity of each item, 1 by 1
 		int[] quantity;  
 		void getQuantity(int amount) {
@@ -28,7 +35,7 @@ public class A1Jedi {
 			this.count++;
 		}
 		void setItemName () {
-			itemName = new String[this.items];
+			itemName = new String[this.items+1];
 			for (int i = 0; i < itemName.length; i++) {
 			this.itemName[i] = "";  
 			}
@@ -70,6 +77,7 @@ public class A1Jedi {
 	public static void main(String[] args) {
 	
 		Scanner user_input = new Scanner(System.in);
+		int count = 0;
 		int itemNum= user_input.nextInt();
 		Item[] item = new Item[itemNum];
 		for (int i = 0; i < itemNum; i++) {
@@ -89,20 +97,46 @@ public class A1Jedi {
 			customer[i].items = user_input.nextInt();
 			customer[i].setQuantity();
 			customer[i].setItemName();
+			customer[i].setAlreadyPurchased();
 		for (int a = 0; a < customer[i].items; a++) { // edit this
 				int amount = user_input.nextInt();
 				customer[i].getQuantity(amount);
 				String name = user_input.next();
 				customer[i].getItemName(name);
-				for (int b = 0; b < item.length; b++) {
-					if (customer[i].itemName[a].equals(item[b].name)) {
-						item[b].purchased += customer[i].quantity[a];
-						item[b].peoplePurchased++;
-					} 
-				} 
-				
+		}
+		}
+		// this is to set any items with the same name to be already purchased,
+		// so when the program logs how many customers purchased an item,
+		// it will not over-count
+		for (int i = 0; i < customer.length; i++) {
+			for (int b = 0; b < customer[i].itemName.length; b++) {
+				if (b+1 < customer[i].itemName.length) {
+				if (customer[i].itemName[b].contentEquals(customer[i].itemName[b+1])) {
+					customer[i].alreadyPurchased[b+1] = true;
+				}
+			}
 			}
 		}
+	   /* this is to compare the item's names with the names of the customer's items, and if
+		* the item has not been purchased already, the customer count will increase by 1
+		* otherwise, the customer count should stay the same, and only the amount of the items purchased
+		* will increase
+		*/
+		for (int i = 0; i < item.length; i++ ) {
+			for (int a = 0; a < customer.length; a++) {
+				for (int b = 0; b < customer[a].itemName.length; b++) {
+					if (customer[a].itemName[b].contentEquals(item[i].name)) {
+						item[i].purchased += customer[a].quantity[b];
+						if (!customer[a].alreadyPurchased[b]) {
+							item[i].peoplePurchased++;
+						}
+					}
+				}
+			}
+		}
+		
+		
+	
 
 		/* this is to calculate the total ONE TIME for each customer
 		 * By doing this, whenever referencing the total amount each customer
@@ -119,5 +153,9 @@ public class A1Jedi {
 						+ item[i].purchased + " " + item[i].name);
 			}
 		}
-	} // main closer
+	}
 }
+
+
+
+
