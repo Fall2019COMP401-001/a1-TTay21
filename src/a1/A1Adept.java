@@ -124,9 +124,9 @@ public class A1Adept {
 		}
 		sum = sum/customer.length;
 
-		System.out.println(bigCust.firstName + " " + bigCust.lastName + 
+		System.out.println("Biggest: " + bigCust.firstName + " " + bigCust.lastName + 
 				" (" + String.format("%.2f", bigCust.total) + ")");
-	    System.out.println(smallCust.firstName + " " + smallCust.lastName + 
+	    System.out.println("Smallest: " + smallCust.firstName + " " + smallCust.lastName + 
 				" (" + String.format("%.2f", smallCust.total) + ")");
 		System.out.println("Average: " + String.format("%.2f", sum));
 		// attempt to get it back up
