@@ -108,15 +108,19 @@ public class A1Jedi {
 		// this is to set any items with the same name to be already purchased,
 		// so when the program logs how many customers purchased an item,
 		// it will not over-count
+
 		for (int i = 0; i < customer.length; i++) {
 			for (int b = 0; b < customer[i].itemName.length; b++) {
-				if (b+1 < customer[i].itemName.length) {
-				if (customer[i].itemName[b].contentEquals(customer[i].itemName[b+1])) {
-					customer[i].alreadyPurchased[b+1] = true;
+				int temp = 0;
+				for (int c = b+1; c < customer[i].itemName.length; c++) {
+					if (customer[i].itemName[b].equals(customer[i].itemName[c])) {
+						customer[i].alreadyPurchased[c] = true;
+					}
+
 				}
 			}
-			}
 		}
+
 	   /* this is to compare the item's names with the names of the customer's items, and if
 		* the item has not been purchased already, the customer count will increase by 1
 		* otherwise, the customer count should stay the same, and only the amount of the items purchased
